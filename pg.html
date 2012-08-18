@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			function processar()
+			{
+				var hora = document.getElementById("campo1").value;
+				var N = +document.getElementById("campo2").value;
+				var tempArr = hora.split('\:');
+				var d1S = tempArr[0];
+				var d2S = tempArr[1];
+				var d1 = +d1S;
+				var d2 = +d2S;
+				if(d1<10){
+				
+					d1S="0"+d1S;
+					
+				}
+				
+				var jaEraPalNoInicio=new Boolean(false);
+				
+				if(ehPalindromo(d1S,d2S)){
+					
+					jaEraPalNoInicio=true;
+					
+				}
+				
+				for(i=0;i<N;i++){
+					//alert('entrou');
+					d1S=d1+'';
+					if(d1<10){
+						d1S='0'+d1S;
+					}
+					d2S=inverte(d1S);
+					d2=+d2S;
+					if(ehPalindromo(d1S,d2S)){
+						if(jaEraPalNoInicio===true){
+							d1++;
+							N++;
+							jaEraPalNoInicio=false;
+						}else if(horaInvalida(d2S)){
+							d1++;
+							N++;
+						
+						}else{
+							d1++;
+							
+						}
+					}
+					
+				}
+				alert('a hora eh '+d1S+':'+d2S);
+			}
+			function horaInvalida(hora){
+				var hr= +hora;
+				return (hr>59) ? true : false;
+			}
+			function inverte(tal){
+				temp="";
+				temp=tal.substring(1,2)+tal.substring(0,1);
+				return temp;
+			}
+			function ehPalindromo(str1,str2){
+				var temp="";
+				temp=str2.substring(1,2)+str2.substring(0,1);
+				return str1==temp ? true : false;
+			}
+		</script>
+	</head>
+	<body>
+
+		Hora: <input type="text" id="campo1" value="0:00"/><br />
+		N: <input type="text" id="campo2" style="margin-left:20px"/>
+		<br /><br />
+		<button onclick="processar()">Enviar</button>
+
+
+	</body>
+</html>
+
